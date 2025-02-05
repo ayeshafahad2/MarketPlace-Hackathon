@@ -1,28 +1,29 @@
 import { shipengine } from "@/lib/helper/shipengine";
 import { NextRequest, NextResponse } from "next/server";
 
-// Define route parameters correctly
+// Define the context to match Next.js expectations
+interface RouteParams {
+  params: Promise<{ label_id: string }>; // ✅ Treating params as a Promise
+}
+
 export async function GET(
   req: NextRequest,
-  context: { params: { label_id: string } } // Properly typed context
+  context: RouteParams // ✅ Context parameter as a RouteParams type
 ): Promise<NextResponse> {
-  // Accessing the label_id from context
-  const label_id = context.params.label_id;
-
-  // Handle missing label_id
-  if (!label_id) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
-  }
-
   try {
-    // Tracking using label ID
+    // ✅ Awaiting the params since it's treated as a Promise
+    const { label_id } = await context.params;
+
+    if (!label_id) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    }
+
+    // Fetch tracking information using ShipEngine
     const label = await shipengine.trackUsingLabelId(label_id);
-    
+
     return NextResponse.json(label, { status: 200 });
   } catch (error) {
-    console.error("Error fetching label:", error);
+    console.error("Error tracking label:", error);
     return NextResponse.json({ error: (error as Error).message }, { status: 500 });
   }
 }
-
-// Ensure there is no default export
