@@ -115,8 +115,8 @@ export default function Navbar() {
             {/* Icons Section (Mobile) */}
             <div className="mt-6 flex justify-evenly border-t pt-4">
               <SignedOut>
-                <SignInButton className="hover:text-blue-500 transition-colors">
-                  Sign In
+                <SignInButton>
+                <Icon icon="mdi:account-alert-outline" className="w-24 h-24 sm:w-24 sm:h-8" />
                 </SignInButton>
               </SignedOut>
               <SignedIn>
