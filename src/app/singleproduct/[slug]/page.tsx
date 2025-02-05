@@ -14,11 +14,22 @@ const Notification = ({ message }: { message: string }) => (
     {message}
   </div>
 );
+interface Product {
+  id: string;
+  title: string;
+  price: number;
+  description: string;
+  productImage: string; // ✅ Make it a string instead of an object
+  slug: { current: string };
+}
+
+
+
 
 const ProductPage = () => {
   const { slug } = useParams(); // ✅ Extract slug properly
   const { addToCart, addToWishlist } = useCart();
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<Product | null>(null); // Set type here
   const [notification, setNotification] = useState<string | null>(null);
 
   useEffect(() => {
@@ -65,7 +76,7 @@ const ProductPage = () => {
       </div>
     );
   }
- 
+
   return (
     <div className="container mx-auto px-6 py-4">
       {notification && <Notification message={notification} />}

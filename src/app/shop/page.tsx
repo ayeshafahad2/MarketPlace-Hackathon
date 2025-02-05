@@ -12,7 +12,7 @@ interface Product {
   _id: string;
   title: string;
   slug: { current: string };
-  productImage?: any; // Replace with an actual type if possible
+  productImage?: string; // Replace with an actual type if possible
   price: number;
   tags?: string[];
   discountPercentage?: number;
