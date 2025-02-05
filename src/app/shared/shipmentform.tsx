@@ -30,8 +30,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import ShipmentRatesCard, { ShipmentCardProps } from "@/app/shared/shipmentsratescard";
-import LabelCard from "@/app/shared/labelcard";
+import ShipmentRatesCard, { ShipmentCardProps } from "@/app/shared/shipmentsRatesCard";
+import LabelCard from "@/app/shared/labelCard";
 import Loader from "@/app/shared/loader";
 
 const formSchema = z.object({
