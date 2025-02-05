@@ -119,7 +119,7 @@ const ShopPage = () => {
             <div className="relative w-full h-[350px]">
               {product.productImage ? (
                 <Image
-                  src={urlForImage(product.productImage).url()}
+                  src={urlForImage(product.productImage)}
                   alt={product.title}
                   layout="fill"
                   objectFit="cover"

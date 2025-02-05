@@ -1,5 +1,3 @@
-// app/addtocart/page.tsx
-
 "use client";
 import { useCart } from "@/app/context/Cart";
 import { FaTrash } from "react-icons/fa";
@@ -46,11 +44,11 @@ export default function Cart() {
                     <td className="px-4 py-2 flex items-center gap-4">
                       {item.productImage && (
                         <Image
-                          src={urlForImage(item.productImage).width(100).height(100).url()}
+                          src={urlForImage(item.productImage, 100, 100)}  // Pass image object
                           alt={item.title}
-                          width={64}
-                          height={64}
-                          className="w-16 h-16 object-cover"
+                          width={100}
+                          height={100}
+                          className="object-cover"
                         />
                       )}
                       <span className="text-lg">{item.title}</span>

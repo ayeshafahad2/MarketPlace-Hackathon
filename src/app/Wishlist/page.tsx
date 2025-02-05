@@ -25,14 +25,14 @@ export default function Wishlist() {
               <div className="flex items-center gap-4">
                 {/* Displaying the image */}
                 {item.productImage && (
-                  <Image
-                    src={urlForImage(item.productImage).width(100).height(100).url()}
-                    alt={item.title}
-                    width={64}
-                    height={64}
-                    className="w-16 h-16 object-cover"
-                  />
-                )}
+      <Image
+        src={urlForImage(item.productImage, 100, 100)}  // Pass image object
+        alt={item.title}
+        width={100}
+        height={100}
+        className="object-cover"
+      />
+)}
                 <span className="text-lg">{item.title}</span>
               </div>
               <div className="flex items-center gap-4">

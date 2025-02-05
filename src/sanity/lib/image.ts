@@ -10,7 +10,39 @@ if (!projectId || !dataset) {
 // Create image builder instance
 const builder = createImageUrlBuilder({ projectId, dataset });
 
-export const urlForImage = (source: SanityImageSource) => {
-  if (!source) return builder.image("").url(); // Prevent undefined errors
-  return builder.image(source);
+export const urlForImage = (source: SanityImageSource, width?: number, height?: number) => {
+  if (!source) {
+    console.error("No source provided for image URL generation");
+    return "";
+  }
+
+  try {
+    // Ensure that the builder is properly handling the image source
+    let imageUrl = builder.image(source);
+
+    if (!imageUrl) {
+      console.error("Invalid image source provided");
+      return "";
+    }
+
+    // Adjust dimensions if provided
+    if (width) {
+      imageUrl = imageUrl.width(width);
+    }
+    if (height) {
+      imageUrl = imageUrl.height(height);
+    }
+
+    // Generate the URL
+    const url = imageUrl.url();
+    if (!url) {
+      console.error("Error generating image URL");
+      return "";
+    }
+
+    return url;
+  } catch (error) {
+    console.error("Error in image URL generation:", error);
+    return "";
+  }
 };
