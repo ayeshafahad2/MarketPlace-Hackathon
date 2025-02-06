@@ -50,7 +50,9 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-4 sm:gap-6 text-selfcolors-darkBrown">
             <SignedOut>
               <SignInButton >
+
               <Icon icon="mdi:account-alert-outline" className="w-24 h-24 sm:w-24 sm:h-8" />
+
               </SignInButton>
             </SignedOut>
             <SignedIn>
