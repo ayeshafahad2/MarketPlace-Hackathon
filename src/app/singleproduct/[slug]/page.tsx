@@ -143,7 +143,7 @@ const ProductPage = () => {
           <div className="flex gap-4 mt-4">
             <button
               onClick={handleAddToCart}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-blue-700 transition"
+              className="bg-selfcolors-darkBrown text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-selfcolors-lightCream transition"
             >
               <FaShoppingCart />
               Add to Cart
@@ -151,7 +151,7 @@ const ProductPage = () => {
 
             <button
               onClick={handleAddToWishlist}
-              className="bg-red-500 text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-red-600 transition"
+              className="bg-selfcolors-darkBrown text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-ligh transition"
             >
               <FaHeart />
               Wishlist
