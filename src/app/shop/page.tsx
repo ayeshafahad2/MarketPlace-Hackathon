@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { FaSlidersH, FaThLarge } from "react-icons/fa";
+import {  FaThLarge } from "react-icons/fa";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";

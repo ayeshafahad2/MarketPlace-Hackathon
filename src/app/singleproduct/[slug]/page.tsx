@@ -93,6 +93,7 @@ const ProductPage = () => {
         <div className="col-span-12 md:col-span-2 flex md:flex-col gap-12 overflow-auto">
           {product?.productImage ? ([
             <Image
+            key="image1" // Add a key here
               src={urlForImage(product.productImage)}
               alt={product.title}
               width={80}
@@ -100,6 +101,7 @@ const ProductPage = () => {
               className="w-20 h-20 md:w-24 md:h-24 object-cover border rounded-md cursor-pointer hover:opacity-75"
             />,
             <Image
+            key="image2" // Add a key here
               src={urlForImage(product.productImage)}
               alt={product.title}
               width={80}
@@ -107,6 +109,7 @@ const ProductPage = () => {
               className="w-20 h-20 md:w-24 md:h-24 object-cover border rounded-md cursor-pointer hover:opacity-75"
             />,
             <Image
+            key="image3" // Add a key here
               src={urlForImage(product.productImage)}
               alt={product.title}
               width={80}
@@ -114,6 +117,7 @@ const ProductPage = () => {
               className="w-20 h-20 md:w-24 md:h-24 object-cover border rounded-md cursor-pointer hover:opacity-75"
             />,
             <Image
+            key="image4" // Add a key here
               src={urlForImage(product.productImage)}
               alt={product.title}
               width={80}

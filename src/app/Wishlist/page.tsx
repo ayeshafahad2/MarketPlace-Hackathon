@@ -6,7 +6,6 @@ import { FaTrash } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { urlForImage } from "@/sanity/lib/image";
-import ReviewPage from "../Reviews/page";
 
 export default function Wishlist() {
   const { wishlist, removeFromWishlist, addToCart } = useCart();
