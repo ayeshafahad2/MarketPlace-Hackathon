@@ -1,5 +1,17 @@
-import { shipengine } from "@/lib/helper/shipengine";
+// api/shipengine/label-id/route.ts
+
 import { NextRequest, NextResponse } from "next/server";
+import ShipEngine from "shipengine"; // Import the ShipEngine SDK
+
+// Get the API key from environment variables
+const apiKey = process.env.SHIPENGINE_API_KEY;
+
+if (!apiKey) {
+  throw new Error("ShipEngine API key is missing. Set SHIPENGINE_API_KEY in your environment variables.");
+}
+
+// Initialize the ShipEngine SDK with the API key
+const shipengine = new ShipEngine(apiKey);
 
 /**
  * POST handler to create a shipping label from a rate ID.
@@ -9,7 +21,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     // Parse the JSON body of the request to extract the rateId
     const { rateId } = await req.json();
 
-    // // Validate that rateId is provided
+    // Validate that rateId is provided
     if (!rateId) {
       return NextResponse.json(
         { error: "rateId is required" },
