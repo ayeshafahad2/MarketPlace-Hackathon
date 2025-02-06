@@ -21,11 +21,11 @@ interface Product {
 const ShopPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [show, setShow] = useState<number>(8);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [sortBy, setSortBy] = useState<string>("Default");
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [gridView, setGridView] = useState<boolean>(true);
+  const show = 8; // Fixed value for products to show
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -145,11 +145,7 @@ const ShopPage = () => {
       </div>
 
       <div
-        className={`grid ${
-          gridView
-            ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-            : "grid-cols-1"
-        } gap-6 p-6`}
+        className={`grid ${gridView ? "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" : "grid-cols-1"} gap-6 p-6`}
       >
         {filteredProducts
           .slice((currentPage - 1) * show, currentPage * show)
