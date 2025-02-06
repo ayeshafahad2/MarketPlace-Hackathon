@@ -4,7 +4,9 @@
 import { useCart } from "@/app/context/Cart";
 import { FaTrash } from "react-icons/fa";
 import Image from "next/image";
+import Link from "next/link";
 import { urlForImage } from "@/sanity/lib/image";
+import ReviewPage from "../Reviews/page";
 
 export default function Wishlist() {
   const { wishlist, removeFromWishlist, addToCart } = useCart();
@@ -53,6 +55,10 @@ export default function Wishlist() {
           ))}
         </ul>
       )}
+          <Link href="/shop" className="block text-center mt-4 text-blue-600 hover:underline">
+          ← Back to Shop
+        </Link>
     </div>
+    
   );
 }

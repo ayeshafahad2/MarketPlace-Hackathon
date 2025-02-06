@@ -80,6 +80,12 @@ const ShopPage = () => {
 
   const uniqueCategories = ["All", ...new Set(products.flatMap((p) => p.tags || []))];
 
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
+
   return (
     <>
       <div className="relative">
@@ -129,7 +135,13 @@ const ShopPage = () => {
             </Link>
           </div>
         ))}
+</div>
+<div className="flex justify-center space-x-4 mt-6">
+        <button disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)} className="px-4 py-2 bg-selfcolors-darkBrown rounded disabled:opacity-50">Previous</button>
+        <span>Page {currentPage} of {totalPages}</span>
+        <button disabled={currentPage === totalPages} onClick={() => handlePageChange(currentPage + 1)} className="px-4 py-2 bg-selfcolors-darkBrown rounded disabled:opacity-50">Next</button>
       </div>
+      
     </>
   );
 };

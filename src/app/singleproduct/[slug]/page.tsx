@@ -7,6 +7,7 @@ import Image from "next/image";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useCart } from "@/app/context/Cart";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import ReviewPage from "@/app/Reviews/page";
 
 // Notification Component
 const Notification = ({ message }: { message: string }) => (
@@ -87,10 +88,31 @@ const ProductPage = () => {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 py-6">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 py-12">
         {/* Side Images */}
-        <div className="col-span-12 md:col-span-2 flex md:flex-col gap-3 overflow-auto">
-          {product?.productImage ? (
+        <div className="col-span-12 md:col-span-2 flex md:flex-col gap-12 overflow-auto">
+          {product?.productImage ? ([
+            <Image
+              src={urlForImage(product.productImage)}
+              alt={product.title}
+              width={80}
+              height={80}
+              className="w-20 h-20 md:w-24 md:h-24 object-cover border rounded-md cursor-pointer hover:opacity-75"
+            />,
+            <Image
+              src={urlForImage(product.productImage)}
+              alt={product.title}
+              width={80}
+              height={80}
+              className="w-20 h-20 md:w-24 md:h-24 object-cover border rounded-md cursor-pointer hover:opacity-75"
+            />,
+            <Image
+              src={urlForImage(product.productImage)}
+              alt={product.title}
+              width={80}
+              height={80}
+              className="w-20 h-20 md:w-24 md:h-24 object-cover border rounded-md cursor-pointer hover:opacity-75"
+            />,
             <Image
               src={urlForImage(product.productImage)}
               alt={product.title}
@@ -98,7 +120,8 @@ const ProductPage = () => {
               height={80}
               className="w-20 h-20 md:w-24 md:h-24 object-cover border rounded-md cursor-pointer hover:opacity-75"
             />
-          ) : (
+          
+          ]) : (
             <p className="text-gray-500">No image available</p>
           )}
         </div>
@@ -143,7 +166,7 @@ const ProductPage = () => {
           <div className="flex gap-4 mt-4">
             <button
               onClick={handleAddToCart}
-              className="bg-selfcolors-darkBrown text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-selfcolors-lightCream transition"
+              className="bg-selfcolors-darkBrown text-white px-4 py-2 rounded-md flex items-center gap-2  transition"
             >
               <FaShoppingCart />
               Add to Cart
@@ -159,6 +182,7 @@ const ProductPage = () => {
           </div>
         </div>
       </div>
+      <ReviewPage/>
     </div>
   );
 };
