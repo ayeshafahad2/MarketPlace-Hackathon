@@ -21,10 +21,11 @@ interface Product {
 const ShopPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-  const [show, setShow] = useState<number>(8);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [sortBy, setSortBy] = useState<string>("Default");
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [show, setShow] = useState<number>(8); // Remove if not used
+const [sortBy, setSortBy] = useState<string>("Default"); // Remove if not used
+const [selectedCategory, setSelectedCategory] = useState<string>("All"); // Remove if not used
+
   const [gridView, setGridView] = useState<boolean>(true);
 
   useEffect(() => {
