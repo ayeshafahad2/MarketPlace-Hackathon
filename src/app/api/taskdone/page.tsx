@@ -24,27 +24,19 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ amount }) => {
       try {
         const response = await fetch("/api/create-payment-intent", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ amount: convertToSubcurrency(amount) }),
         });
 
-        if (!response.ok) {
-          throw new Error("Failed to create payment intent");
-        }
+        if (!response.ok) throw new Error("Failed to create payment intent");
 
         const data = await response.json();
-        if (!data.clientSecret) {
-          throw new Error("Invalid client secret received");
-        }
+        if (!data.clientSecret) throw new Error("Invalid client secret received");
 
         setClientSecret(data.clientSecret);
-        setErrorMessage(null); // Reset error on successful response
+        setErrorMessage(null);
       } catch (error) {
-        setErrorMessage(
-          error instanceof Error ? error.message : "An unexpected error occurred."
-        );
+        setErrorMessage(error instanceof Error ? error.message : "An error occurred.");
       }
     };
 
@@ -54,7 +46,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ amount }) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true);
-    setErrorMessage(null); // Reset error on new attempt
+    setErrorMessage(null);
 
     if (!stripe || !elements || !clientSecret) {
       setErrorMessage("Payment initialization failed. Please try again.");
@@ -64,26 +56,19 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ amount }) => {
 
     try {
       const { error: submitError } = await elements.submit();
-
-      if (submitError) {
-        throw new Error(submitError.message || "Error submitting payment.");
-      }
+      if (submitError) throw new Error(submitError.message || "Error submitting payment.");
 
       const { error } = await stripe.confirmPayment({
         elements,
         clientSecret,
         confirmParams: {
-          return_url: `http://localhost:3000/payment-success?amount=${amount}`,
+          return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment-success?amount=${amount}`,
         },
       });
 
-      if (error) {
-        throw new Error(error.message || "Payment confirmation failed.");
-      }
+      if (error) throw new Error(error.message || "Payment confirmation failed.");
     } catch (error) {
-      setErrorMessage(
-        error instanceof Error ? error.message : "An unexpected error occurred."
-      );
+      setErrorMessage(error instanceof Error ? error.message : "An unexpected error occurred.");
     }
 
     setLoading(false);
@@ -92,10 +77,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ amount }) => {
   if (!clientSecret) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div
-          className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent text-surface dark:text-white"
-          role="status"
-        >
+        <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent text-surface dark:text-white">
           <span className="sr-only">Loading...</span>
         </div>
       </div>
@@ -103,10 +85,7 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ amount }) => {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="bg-white p-4 rounded-md shadow-md w-full max-w-md mx-auto"
-    >
+    <form onSubmit={handleSubmit} className="bg-white p-4 rounded-md shadow-md w-full max-w-md mx-auto">
       <PaymentElement />
 
       {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
