@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 import { useCart } from "@/app/context/Cart";
 import { FaTrash } from "react-icons/fa";
 import Image from "next/image";
@@ -21,6 +21,10 @@ export default function Cart() {
 
   const handleCheckout = () => {
     router.push("/checkout");
+  };
+
+  const handlePayment = () => {
+    router.push("/information");
   };
 
   return (
@@ -59,15 +63,16 @@ export default function Cart() {
                     </td>
                     <td className="px-4 py-2">${item.price.toFixed(2)}</td>
                     <td className="px-4 py-2 flex items-center gap-2">
-                    <button
-  className="bg-gray-300 px-2 py-1 rounded"
-  onClick={() => updateQuantity(item.id, (item.quantity ?? 1) > 1 ? -1 : 0)}
-  disabled={(item.quantity ?? 1) <= 1} // Default to 1 if quantity is undefined
->
-  -
-</button>
+                      <button
+                        className="bg-gray-300 px-2 py-1 rounded"
+                        onClick={() => updateQuantity(item.id, (item.quantity ?? 1) > 1 ? -1 : 0)}
+                        disabled={(item.quantity ?? 1) <= 1}
+                      >
+                        -
+                      </button>
 
                       <span className="text-lg">{item.quantity || 1}</span>
+
                       <button
                         className="bg-gray-300 px-2 py-1 rounded"
                         onClick={() => updateQuantity(item.id, 1)}
@@ -104,20 +109,30 @@ export default function Cart() {
               <span>Total:</span>
               <span>${total.toFixed(2)}</span>
             </div>
+
+            {/* Payment Buttons */}
             <button
               onClick={handleCheckout}
               className="w-full bg-blue-600 text-white px-4 py-2 mt-4 rounded-lg hover:bg-blue-800"
             >
               Checkout
             </button>
+
+            <button
+              onClick={handlePayment}
+              className="w-full bg-green-600 text-white px-4 py-2 mt-2 rounded-lg hover:bg-green-800"
+            >
+              Pay by Card
+            </button>
+
             <Link href="/shop" className="block text-center mt-4 text-blue-600 hover:underline">
               ← Back to Shop
             </Link>
           </div>
         </div>
       )}
-                <ReviewPage/>
 
+      <ReviewPage />
     </div>
   );
 }
