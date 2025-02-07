@@ -8,16 +8,13 @@ import {
 } from "@stripe/react-stripe-js";
 import convertToSubcurrency from "@/lib/convertToSubcurrency";
 
-interface CheckoutPageProps {
-  amount: number;
-}
-
-const CheckoutPage: React.FC<CheckoutPageProps> = ({ amount }) => {
+const CheckoutPage = () => {
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const amount = 10; // Example amount, change as needed.
 
   useEffect(() => {
     const fetchPaymentIntent = async () => {
@@ -40,8 +37,8 @@ const CheckoutPage: React.FC<CheckoutPageProps> = ({ amount }) => {
       }
     };
 
-    if (amount > 0) fetchPaymentIntent();
-  }, [amount]);
+    fetchPaymentIntent();
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
