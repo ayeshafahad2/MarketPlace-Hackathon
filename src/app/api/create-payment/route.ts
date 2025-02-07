@@ -1,7 +1,16 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY as string;
+
+if (!stripeSecretKey) {
+  throw new Error("Missing STRIPE_SECRET_KEY environment variable.");
+}
+
+// Fix: Allow Stripe to use the latest API version automatically
+const stripe = new Stripe(stripeSecretKey, {
+  apiVersion: undefined, // or use "2025-01-27.acacia"
+});
 
 export async function POST(req: Request) {
   try {
@@ -18,11 +27,11 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ clientSecret: paymentIntent.client_secret });
-  } catch (error) {
-    console.error("Payment Intent Error:", error);
+  } catch (error: any) {
+    console.error("Payment Intent Error:", error.message || error);
 
     return NextResponse.json(
-      { error: "Payment failed. Please try again later." },
+      { error: error?.message || "Payment failed. Please try again later." },
       { status: 500 }
     );
   }
