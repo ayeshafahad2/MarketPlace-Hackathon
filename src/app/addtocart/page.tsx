@@ -20,7 +20,7 @@ export default function Cart() {
   const total = subtotal + shipping;
 
   const handleCheckout = () => {
-    router.push("/checkout");
+    router.push("/shippingtractrates");
   };
 
   const handlePayment = () => {
