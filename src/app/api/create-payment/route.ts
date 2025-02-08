@@ -25,11 +25,15 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ clientSecret: paymentIntent.client_secret });
-  } catch (error: any) {
-    console.error("Payment Intent Error:", error.message || error);
-    return NextResponse.json(
-      { error: error?.message || "Payment failed. Please try again later." },
-      { status: 500 }
-    );
+  } catch (error) {
+    console.error("Payment Intent Error:", error);
+
+    let errorMessage = "Payment failed. Please try again later.";
+
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
